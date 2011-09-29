@@ -52,7 +52,7 @@ class ExceptionNotifier
         instance_variable_set("@#{name}", value)
       end
 
-      prefix   = "#{@options[:email_prefix]}#{@kontroller.controller_name}##{@kontroller.action_name}"
+      prefix   = "#{@options[:email_prefix]}#{@name}"
       subject  = "#{prefix} (#{@exception.class}) #{@exception.message.inspect}"
 
       mail(:to => @options[:exception_recipients], :from => @options[:sender_address], :subject => subject) do |format|
