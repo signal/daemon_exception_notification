@@ -1,0 +1,10 @@
+-------------------------------
+Message:
+-------------------------------
+
+* Process: <%= $$ %>
+* Server : <%= `hostname -s`.chomp %>
+
+* Message:
+   <%= @message.nil? ? "nil" : @message.to_yaml %>
+

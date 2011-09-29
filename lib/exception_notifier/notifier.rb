@@ -20,7 +20,7 @@ class ExceptionNotifier
       end
 
       def default_sections
-        %w(request session environment backtrace)
+        %w(message backtrace)
       end
 
       def default_options
@@ -36,7 +36,7 @@ class ExceptionNotifier
       end
     end
 
-    def exception_notification(env, exception)
+    def exception_notification(env, exception, name, message)
       @env        = env
       @exception  = exception
       @options    = (env['exception_notifier.options'] || {}).reverse_merge(self.class.default_options)
@@ -44,6 +44,8 @@ class ExceptionNotifier
       @request    = ActionDispatch::Request.new(env)
       @backtrace  = clean_backtrace(exception)
       @sections   = @options[:sections]
+      @name       = name
+      @message    = message
       data        = env['exception_notifier.exception_data'] || {}
 
       data.each do |name, value|
